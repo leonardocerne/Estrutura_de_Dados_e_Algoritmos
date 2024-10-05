@@ -1,0 +1,35 @@
+Árvores
+ * forma mais natural: recursividade
+ * composta de um conjunto de nós
+ * um nó raiz contém ZERO ou mais subárvores, cujas as raízes estão ligadas a raiz
+ * A? Filhos de A? Folhas? Irmãos de B? Primos de H? Pai de I?
+ * Grau do nó -> número de filhos
+ * Grau da árvore -> grau do nó com maior grau
+ * Nó interno -> nó com grau maior que 0
+ * Nó folha -> nó com grau igual a zero
+ * Caminho -> Um caminho é uma sequência de nós consecutivos distintos entre dois nós
+ * Comprimento do caminho -> número de ligações entre os nós do caminho
+ * Altura? Comprimento do caminho mais longo entre o nó raiz até uma das folhas (se uma árvore só tem um elemento a altura é 0)
+ * Floresta = Conjunto de árvores
+ * Tipos de árvores
+  - árvores n-árias x árvores binárias
+  - árvores homogêneas x árvores heterogêneas
+
+Árvores Binárias
+ * árvores binárias são uma das árvores mais usadas em computação
+ * Cada nó tem 0, 1, ou no máximo 2 filhos
+
+
+ Representação de Árvore Binária em C:
+    typedef struct arvbin{
+        int info;
+        struct arvbin *esq, *dir;
+    }TAB;
+ 
+ Percorrimento em árvore binária:
+  *1- pré ordem ou profundidade ->r e d
+  *2- simétrica -> e r da
+  *3- pós-ordem-> e d r
+  *4- largura-> nó seguido dos seus filhos, da esq p dir
+
+Códigos na biblioteca TAB.c
