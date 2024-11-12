@@ -83,3 +83,18 @@ TAB *vet2ab(int *vet, int n){
     if(n <= 0) return NULL;
     return TAB_cria(vet[n/2], vet2ab(vet, n/2), vet2ab(&vet[n/2 + 1], n - (n/2) - 1));
 }
+
+TAB *retira_folha(TAB *a, int *info){
+  if(!a){
+    (*info) = -1;
+    return a;
+  }
+  if((!a->esq) && (!a->dir)){
+    (*info) = a->info;
+    free(a);
+    return NULL;
+  }
+  if(a->esq) a->esq = retira_folha(a->esq, info);
+  else a->dir = retira_folha(a->dir, info);
+  return a;
+}

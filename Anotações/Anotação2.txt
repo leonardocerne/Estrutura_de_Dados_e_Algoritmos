@@ -1,0 +1,21 @@
+Árvores de Busca Binária(ABB)
+ * Definição: uma ABB é uma AB que segue as seguintes propriedades:
+  P1 - Todo elemento a esquerda da raiz é menor que a raiz;
+  P2 - Todo elemento a direita da raiz é maior que a raiz;
+  P3 - P1 e P2 são válidas p/todos os nós da árvore;
+
+ * Se a ABB está balanceada, então as operações de inserção, retirada e busca são O(log n)
+ * Causadoras de desbalanceamento?
+    -inserção
+    -retirada
+ * Iguais a AB:
+    -impressao
+    -inicialização
+    -liberação
+    -criação
+    -altura
+
+ * Distintas de AB:
+    -busca
+    -inserção
+    -retirada

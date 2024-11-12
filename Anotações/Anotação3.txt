@@ -1,0 +1,37 @@
+AVL(Adelson-Landis & Velskii, 1962)
+ *Motivação
+  - resolver o problema da ABB
+  - Ex: se vc inserir {1, 3, 2, 5, 4, 6, 7} nessa ordem a ABB ficará desbalanceada,
+        para ela ficar balanceada voce teria que inserir esses elementos na ordem {4, 2, 1, 3, 6, 5, 7}
+ *AVL é uma ABB balanceada(ABBB) onde esse balanceamento ocorre com base no conceito de altura.
+ *AVL é uma ABBB em que, para todos os nós, a diferença de altura das sub-árvores esq e dir pertencem ao intervalo[-1,1].
+ *Fator de Balanceamento(FB) = FB(a) = altura(a->esq) - altura(a->dir).
+ *Iguais a ABB:
+  - Busca
+  - Libera
+  - Impressão
+  - Criação (Altera campo alt)
+  - Inicialização
+ *Diferentes da ABB:
+  - Inserção
+  - Retirada
+ *Ordem de log n: busca, inserção e retirada!
+
+ *Rotações em AVL
+  a - Rotação simples à esquerda(RSE):RR
+    RSE(Nó):
+      FB(D) <= 0
+      FB(P) = -2
+  b - Rotação simples à direita(RSD):LL
+    RSE(Nó)
+      FB(E) >= 0
+      FB(P) = 2
+  c - Rotação esquerda direita(RED):LR 
+    RED(Nó)
+      FB(E) = -1
+      FB(P) = 2
+      o que acontece => RSE e dps RSD
+  d - Rotação direita esquerda(RDE):RL 
+    RDE(Nó)
+      FB(D) = 1
+      FB(P) = -2

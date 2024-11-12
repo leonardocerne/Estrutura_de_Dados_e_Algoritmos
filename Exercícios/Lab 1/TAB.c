@@ -98,3 +98,16 @@ TAB *retira_folha(TAB *a, int *info){
   else a->dir = retira_folha(a->dir, info);
   return a;
 }
+
+TAB* insere(TAB* a, int x){
+    if(!a){
+        TAB* novo = (TAB*)malloc(sizeof(TAB));
+        novo ->info = x;
+        novo->esq = NULL;
+        novo->dir = NULL;
+        return novo;
+    } 
+    if(x > a->info) a->dir = insere(a->dir,x);
+    if(x < a->info) a->esq = insere(a->esq,x);
+    return a;
+}

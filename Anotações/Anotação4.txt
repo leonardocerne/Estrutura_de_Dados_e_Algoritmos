@@ -1,0 +1,23 @@
+Grafos
+ *São estruturas de dados formadas por um conjunto de vértices e um conjunto de arestas
+ *Grafos tem uma quantidade de vértices(não nula) e de arestas(possivelmente nula)
+ *Grafos orientados: arestas possuem uma direção
+ *Grafos não orientados: as arestas são bi-direcionais(se existe uma conexão a->b então também existe uma conexão b->a)
+
+ *Grafo orientado:
+    -Arestas possuem uma direção
+ *Grafo não orientado:
+    -Arestas são bi-direcionais
+ *Um grafo pode ter valores associados as vertices e as arestas
+ *Um grafo é dito conectado se existe um caminho ligando cada par de vértices
+ *Um laço é uma aresta que tem ambas as extremidades em um mesmo vértices
+ *Um ciclo é um caminho entre v1 e vn que se conecta de volta em v1
+ *grafo simétrico é um grafo orientado que tem conexões ida e volta em todos os vértices
+ 
+ *Representação física de grafos:
+   -Matriz de adjacência = uma matriz onde cada linha e coluna são os nós e cada elemento Aij da matriz é se tem conexão entre o nó linha com o nó coluna
+
+   -Matriz de incidência = uma matriz n x m onde n é o número de vértices e m o número de arestas e existe a interpretação (-1 se o vértice i é a origem da aresta j,
+   1 se o vértice i é o término da aresta j e 0 se a aresta não tá conectada com o elemento)
+
+   -lista de adjacência = Para cada vértice v é representada a lista de vértices u

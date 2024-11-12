@@ -1,0 +1,117 @@
+Arquivo Binário:
+ *operações:
+  ->int fread(void *ptr, int tam_cada_elem, int nelem, FILE *fp);
+   ptr? conteúdo do arquivo é copiado para o ponteiro
+   tam_cada_elem? Tamanho em bytes de cada elemento
+   nelem? número de elementos
+   retorno: ou nelem, se estiver tudo certo, ou <nelem, indicando erro
+  ->int fwrite(void *ptr, int tam_cada_elem, int nelem, FILE *fp)
+  ->int fseek(FILE *fp, long int offset, int CTE_ORIGEM);
+    CTE_ORIGEM:
+     . SEEK_CUR (=1): posição atual;
+     . SEEK_SET (=0): início do arquivo;
+     . SEEK_END (=2): fim do arquivo;
+    Posição final? (offset + CTE_ORIGEM) bytes
+    Retorno: ou =0, se estiver tudo certo, ou !=, indicando erro
+  ->void rewind(FILE *fp) retorna pro início;
+  ->Obtém a posição do ponteiro:
+  long int ftell(FILE *fp);
+
+Exemplo: Busca Binária em arquivo binário:
+    void criaArqBinOrd(char *nome_arq){
+        FILE *fp = fopen(nome_arq, "wb");
+        if(!fp) exit(1);
+        int ant, atual;
+        printf("Digite valores ordenados, caso contrário, pare a gravacao...\n");
+        scanf("%d", &ant);
+        fwrite(&ant, sizeof(int), 1, fp);
+        do{
+            scanf("%d", &atual);
+            if(atual < anterior) break;
+            fwrite(&atual, sizeof(int), 1, fp);
+            ant = atual;
+        }while(1);
+        fclose(fp);
+    }
+
+    int bb(int *vet, int n, int x){
+        if(n <= 0) return -1;
+        int ini = 0, fim = n-1, meio;
+        while(ini <= fim){
+            meio = (ini + fim)/2;
+            if(vet[meio] == x) return meio;
+            if(vet[meio] > x) fim = meio - 1;
+            else ini = meio + 1;
+        }
+        return -1;
+    }
+
+    int BB_arq(char *arq, int x){
+        FILE *fp = fopen(arq, "rb");
+        if(!fp) exit(1);
+        int ini = 0, fim, meio, elem_meio;
+        fseek(fp, 0L, SEEK_END);
+        fim = ftell(fp) - sizeof(int);
+        while(ini <= fim){
+            meio = ((ini + fim) / sizeof(int)) * sizeof(int);
+            fseek(fp, meio, SEEK_SET);
+            fread(&elem_meio, sizeof(int), 1, fp);
+            if(elem_meio == x){
+                fclose(fp);
+                return meio;
+            }
+            if(elem_meio > x) fim = meio - sizeof(int);
+            else ini = meio + sizeof(int);
+        }
+        fclose(fp);
+        return -1;
+    }
+
+Selection Sort em Arq Bin:
+    void ss_arq(char *arq){
+        FILE *fp = fopen(arq, "rb+");
+        if(!fp) exit(1);
+        int menor, menor_elem, i, j, elem, r, s, aux;
+        menor = i = 0;
+        r = fread(&menor_elem, sizeof(int), 1, fp);
+        aux = menor_elem;
+        while(r != 1){
+            j = ftell(fp);
+            s = fread(&elem, sizeof(int), 1, fp);
+            while(s == 1){
+                if(elem < menor_elem){
+                    menor_elem = menor;
+                    menor = j;
+                }
+                j = ftell(fp);
+                s = fread(&elem, sizeof(int), 1, fp);
+            }
+            if(menor != i){
+                fseek(fp, menor, SEEK_SET);
+                fwrite(&aux,sizeof(int), 1, fp);
+                fseek(fp, i, SEEK_SET);
+                fwrite(&menor_elem, sizeof(int), 1, fp);
+            }
+            i += sizeof(int);
+            menor = i;
+            fseek(fp, i, SEEK_SET);
+            r = fread(&menor_elem, sizeof(int), 1, fp);
+            aux = menor_elem;
+        }
+        fclose(fp);
+    }
+
+Ordenação de arquivo texto:
+    Classificação:
+     *classificação interna: insere toda a informação numa estrutura e ordena ela
+     *classificação externa: ordena na memoria secundaria
+
+    A classificação externa divide os arquivos em pequenas frações que são ordenadas e intercaladas em duas etapas:
+     - Geração de partições classificadas
+     - Intercalação
+    
+    Partição:
+     *Métodos:
+        - Classificação interna ()
+        - Seleção com substituição
+        - Seleção natural

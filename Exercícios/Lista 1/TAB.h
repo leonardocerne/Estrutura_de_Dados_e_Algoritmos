@@ -20,3 +20,4 @@ TAB *TAB_busca(TAB *a, int elem);
 
 int TAB_altura(TAB *a);
 TAB *vet2ab(int *vet, int n);
+TAB *retira_folha(TAB *a, int *info);
