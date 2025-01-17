@@ -1,0 +1,161 @@
+Heaps (Listas ou Filas de prioridade)
+ *motivação:
+    -ED c/ prioridade
+    -Ex: Servidor de impressão
+ *implementação:
+    -vetor
+    -vetor ord
+    -lista 
+    -lista ord (melhor)
+ *operações:
+    -inserção de qq prioridade
+    -retirada do elem. mais prioritario
+    -alteração do mais prioritario
+    -busca do mais prioritario
+ *solução: Heap
+    -ED manipulada como um "vetor", mas enxergada como uma árvore binária "completa" nos níveis internos.
+ *Operações:
+    int pai(int ind){
+        if(ind <= 0) return INT_MAX;
+        return (ind - 1) / 2;
+    }
+    int esq(int ind){
+        return ind*2 + 1;
+    }
+    ind dir(int ind){
+        return ind*2 + 2;
+    }
+ *Interesse:
+    -Heap bin. de máximo
+    -Heap bin. de mínimo
+ *Propriedade p/uma heap binária ser heap bin. de máximo:
+    para todo ind ind < HEAP:
+        V[pai(ind)] >= V(ind).
+    
+ *Heap bin. de máximo -> heapsort
+ *heapsort
+    *alg. de ordenação: O(nlogn)
+    (a) void maxheapfy(int *vet, int n, int pos);
+    (b) void buildmaxheap(int *vet, int n);
+    (c) void heapsort(int *vet, int n);
+
+    void maxheapfy(int *vet, int n, int pos){
+        int maior = pos, e, d;
+        e = esq(pos);
+        d = dir(pos);
+        if((e < n) && (vet[e] > vet[maior])) maior = e;
+        if((d < n) && (vet[d] > vet[maior])) maior = d;
+        if(maior != pos){
+            int tmp = vet[pos];
+            vet[pos] = vet[maior];
+            vet[maior] = tmp;
+            maxheapfy(vet, n, maior);
+        }
+    }
+
+    void buildmaxheap(int *vet, int n){
+        int ultpai = pai(n-1), i;
+        for(i = ultpai; i >= 0; i--) maxheapfy(vet, n, i);
+    }
+
+    void heapsort(int *vet, int n){
+        buildmaxheap(vet, n);
+        int i;
+        for(i = n-1; i > 0; i--){
+            int tmp = vet[0];
+            vet[0] = vet[i];
+            vet[i] = tmp;
+            maxheapfy(vet, i, 0);
+        }
+    }
+
+Heaps em MS:
+    -> arqbin
+    operações:
+        int pai(int end_arq){
+            if(end_arq <= 0) return INT_MAX;
+            return (((end_arq - sizeof(int)) / sizeof(int)) / 2) * sizeof(int);
+        }
+
+        int esq(int end_arq){
+            return 2 * end_arq + sizeof(int);
+        }
+        
+        int dir(int end_arq){
+            return (end_arq + sizeof(int)) * 2;
+        }
+
+    Algoritmos:
+        void maxheapfy(char *arq, int pos){
+            FILE *fp = fopen(arq, "rb+");
+            if(!fp) exit(1);
+            int maior = pos, n, e = esq(pos), d = dir(pos), maior_elem, aux;
+            fseek(fp, 0L, SEEK_END);
+            n = ftell(fp);
+            fseek(fp, maior, SEEK_SET);
+            fread(&maior_elem, sizeof(int), 1, fp);
+            if(e < n){
+                fseek(fp, e, SEEK_SET);
+                fread(&aux, sizeof(int), 1, fp);
+                if(aux > maior_elem){
+                    maior = e;
+                    maior_elem = aux;
+                }
+            }
+            if(d < n){
+                fseek(fp, d, SEEK_SET);
+                fread(&aux, sizeof(int), 1, fp);
+                if(aux > maior_elem){
+                    maior = d;
+                    maior_elem = aux;
+                }
+            }
+            if(maior != pos){
+                fseek(fp, pos, SEEK_SET);
+                fread(&aux, sizeof(int), 1, fp);
+                fseek(fp, pos, SEEK_SET);
+                fwrite(&maior_elem, sizeof(int), 1, fp);
+                fseek(fp, maior, SEEK_SET);
+                fwrite(&aux, sizeof(int), 1, fp);
+                fclose(fp);
+                maxheapfy(arq, maior);
+            } else fclose(fp);
+        }
+
+        void buildmaxheap(char *arq){
+            FILE *fp = fopen(arq, "rb");
+            if(!fp) exit(1);
+            fseek(fp, 0L, SEEK_END);
+            int i, n = ftell(fp), ultpai = pai(n - sizeof(int));
+            fclose(fp);
+            for(i = ultpai; i >= 0; i = i - sizeof(int)){
+                maxheapfy(arq, i);
+            }
+        }
+
+        void heapsort(char *arq){
+            buildmaxheap(arq);
+            FILE *fp = fopen(arq, "rb+");
+            if(!fp) exit(1);
+            fseek(fp, 0L, SEEK_END);
+            int n = ftell(fp), i;
+            fclose(fp);
+            for(i = n - sizeof(int); i > 0; i = i - sizeof(int)){
+                FILE *fp = fopen(arq, "rb+");
+                if(!fp) exit(1);
+                int aux, auxi;
+                rewind(fp);
+                fread(&aux, sizeof(int), 1, fp);
+                fseek(fp, i, SEEK_SET);
+                fread(&auxi, sizeof(int), 1, fp);
+                rewind(fp);
+                fwrite(&auxi, sizeof(int), 1, fp);
+                fseek(fp, i, SEEK_SET);
+                fwrite(&aux, sizeof(int), 1, fp);
+                fclose(fp);
+                maxheapfy(arq, i);
+            }
+        }
+
+
+    

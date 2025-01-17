@@ -1,0 +1,12 @@
+nome: 
+Maria Pita media: 1.5
+nome: 
+Amora Jehle media: 5.0
+nome: 
+Helena Pereira media: 5.7
+nome: 
+Victor Speorin media: 6.6
+nome: 
+Leonardo Brasil media: 7.7
+nome: 
+Rafaella Jehle media: 10.0

@@ -1,0 +1,45 @@
+Tabela HASH
+ *Motivação?
+    -Alternativa p/acelerar a busca em grande volume de dados
+ *Alternativa?
+    -Uso de indice: B e B+
+    -Calculo
+ *HASH perfeito
+    hash(num) = valor
+ *Exemplo em EDA:
+    typedef struct aluno{
+        int mat;
+        float cr;
+    }TA;
+    
+    mat = 223031171 (semestre, ano, curso, poos enem + dv)
+ *TAB.HASH=>info mais significativa
+  ->no exemplo: pos enem + dv!
+ *TAB.HASH: Usar mais espaço do que necessita : 50%
+ *Função de hash: hash(mat) = indice na Tabela
+ *Carateristica de funções de hash:
+    ->ser facilmente computavel(eficiente)
+    ->deterministica
+    ->serve a distrubuição uniforme
+    ->diminuir o n de colisoes
+ *Tratamento de colisôes
+ *função de resto:
+    int hash(int elem, int N){
+        return elem % N;
+    }
+ *Tratamento de colisões:
+  Encadeamento externo(MP e MS)
+  1-MP(CAMPO(s) a mais):
+    typedef struct aluno{
+        int mat;
+        float cr;
+        struct aluno *prox;
+    }TA;
+  2-MS:
+    typedef struct aluno{
+         int mat;
+         float cr;
+         int status;
+         int prox;
+    }TA;
+    *2 arqs: HASH e DADOS
