@@ -2,7 +2,7 @@
 
 Este repositório reúne implementações desenvolvidas durante a disciplina de **Estruturas de Dados e Algoritmos**, com foco na compreensão prática de conceitos fundamentais da computação.
 
-## 📌 Conteúdo
+##  Conteúdo
 
 Os códigos incluem implementações e exercícios envolvendo:
 
@@ -11,16 +11,16 @@ Os códigos incluem implementações e exercícios envolvendo:
 * Algoritmos de busca, ordenação, remoção
 * Resolução de problemas
 
-## 🎯 Objetivo
+##  Objetivo
 
 Consolidar os principais conceitos de estruturas de dados por meio da implementação prática, reforçando habilidades essenciais para desenvolvimento de software e resolução de problemas.
 
-## 🛠️ Tecnologias utilizadas
+##  Tecnologias utilizadas
 
 * Linguagem C
 * Compiladores padrão (GCC, etc.)
 
-## ▶️ Como executar
+##  Como executar
 
 1. Clone o repositório:
 
@@ -41,10 +41,10 @@ Consolidar os principais conceitos de estruturas de dados por meio da implementa
    ./programa
    ```
 
-## 📂 Organização
+##  Organização
 
 Os arquivos estão organizados de acordo com os tópicos abordados na disciplina, facilitando a navegação e o estudo.
 
-## 📈 Observações
+##  Observações
 
 Este repositório tem caráter educacional e foi desenvolvido como parte da minha formação em computação.
